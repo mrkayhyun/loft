@@ -1,0 +1,226 @@
+# Burrow cleanup catalog.
+#
+# Categories are evaluated in file order. A path claimed by an earlier category
+# (or any ancestor/descendant of it) is never claimed again by a later one, so
+# specific categories must come before broad ones.
+#
+# Fields
+#   id               stable identifier, used by the app and the CLI
+#   group            system | browser | developer | apps
+#   name, summary    human-facing text
+#   symbol           SF Symbol shown in the app
+#   paths            globs; `~` expands to the user's home
+#   exclude          file-name globs skipped inside the matched set
+#   min_age_days     only match entries not modified for N days
+#   selected         selected by default in the review screen
+#   running_apps     process names; while any is running the category is held
+#   action           "trash" (default, recoverable) or "delete" (Trash only)
+
+# ── Browsers ────────────────────────────────────────────────────────────────
+
+[[category]]
+id = "chrome-cache"
+group = "browser"
+name = "Chrome Cache"
+summary = "Rebuildable page and code caches from Google Chrome."
+symbol = "globe"
+paths = ["~/Library/Caches/Google/Chrome/*"]
+running_apps = ["Google Chrome"]
+
+[[category]]
+id = "edge-cache"
+group = "browser"
+name = "Edge Cache"
+summary = "Rebuildable page caches from Microsoft Edge."
+symbol = "globe"
+paths = ["~/Library/Caches/Microsoft Edge/*"]
+running_apps = ["Microsoft Edge"]
+
+[[category]]
+id = "brave-cache"
+group = "browser"
+name = "Brave Cache"
+summary = "Rebuildable page caches from Brave."
+symbol = "globe"
+paths = ["~/Library/Caches/BraveSoftware/Brave-Browser/*"]
+running_apps = ["Brave Browser"]
+
+[[category]]
+id = "firefox-cache"
+group = "browser"
+name = "Firefox Cache"
+summary = "Network cache from Firefox profiles."
+symbol = "globe"
+paths = ["~/Library/Caches/Firefox/Profiles/*/cache2"]
+running_apps = ["firefox"]
+
+# ── Developer ───────────────────────────────────────────────────────────────
+
+[[category]]
+id = "xcode-derived-data"
+group = "developer"
+name = "Xcode Derived Data"
+summary = "Build products and indexes. Xcode rebuilds them on the next build."
+symbol = "hammer"
+paths = ["~/Library/Developer/Xcode/DerivedData/*"]
+running_apps = ["Xcode"]
+
+[[category]]
+id = "xcode-archives"
+group = "developer"
+name = "Xcode Archives"
+summary = "Old app archives. They hold dSYMs for crash symbolication — review before removing."
+symbol = "archivebox"
+paths = ["~/Library/Developer/Xcode/Archives/*"]
+min_age_days = 90
+selected = false
+
+[[category]]
+id = "simulator-caches"
+group = "developer"
+name = "Simulator Caches"
+summary = "CoreSimulator caches and logs. Devices and their data are untouched."
+symbol = "iphone"
+paths = [
+  "~/Library/Developer/CoreSimulator/Caches/*",
+  "~/Library/Logs/CoreSimulator/*",
+]
+running_apps = ["Simulator"]
+
+[[category]]
+id = "xcode-cache"
+group = "developer"
+name = "Xcode Cache"
+summary = "Xcode's own download and documentation caches."
+symbol = "hammer"
+paths = ["~/Library/Caches/com.apple.dt.Xcode/*"]
+running_apps = ["Xcode"]
+
+[[category]]
+id = "node-package-caches"
+group = "developer"
+name = "JavaScript Package Caches"
+summary = "npm, pnpm, Yarn and Bun download caches. Packages are re-fetched on demand."
+symbol = "shippingbox"
+paths = [
+  "~/.npm/_cacache",
+  "~/Library/pnpm/store/*",
+  "~/Library/Caches/Yarn/*",
+  "~/.bun/install/cache/*",
+]
+
+[[category]]
+id = "python-package-caches"
+group = "developer"
+name = "Python Package Caches"
+summary = "pip, uv and conda download caches."
+symbol = "shippingbox"
+paths = [
+  "~/Library/Caches/pip/*",
+  "~/.cache/uv/*",
+  "~/.conda/pkgs/*",
+  "~/miniconda3/pkgs/*",
+  "~/miniforge3/pkgs/*",
+]
+
+[[category]]
+id = "gradle-caches"
+group = "developer"
+name = "Gradle Caches"
+summary = "Gradle build caches, daemons and notifications."
+symbol = "shippingbox"
+paths = [
+  "~/.gradle/caches/*",
+  "~/.gradle/daemon/*",
+  "~/.gradle/notifications/*",
+]
+running_apps = ["java", "Android Studio"]
+
+[[category]]
+id = "cargo-registry-cache"
+group = "developer"
+name = "Cargo Download Cache"
+summary = "Compressed crate downloads. Extracted sources are kept."
+symbol = "shippingbox"
+paths = ["~/.cargo/registry/cache/*"]
+running_apps = ["cargo", "rust-analyzer"]
+
+[[category]]
+id = "homebrew-cache"
+group = "developer"
+name = "Homebrew Downloads"
+summary = "Downloaded bottles and source archives."
+symbol = "mug"
+paths = ["~/Library/Caches/Homebrew/*"]
+running_apps = ["brew"]
+
+[[category]]
+id = "huggingface-cache"
+group = "developer"
+name = "Hugging Face Models"
+summary = "Downloaded models and datasets. Large, but re-downloading can be slow."
+symbol = "brain"
+paths = ["~/.cache/huggingface/hub/*"]
+selected = false
+
+# ── Apps ────────────────────────────────────────────────────────────────────
+
+[[category]]
+id = "partial-downloads"
+group = "apps"
+name = "Incomplete Downloads"
+summary = "Abandoned browser downloads older than a day."
+symbol = "arrow.down.circle"
+paths = [
+  "~/Downloads/*.crdownload",
+  "~/Downloads/*.download",
+  "~/Downloads/*.part",
+]
+min_age_days = 1
+
+[[category]]
+id = "mail-downloads"
+group = "apps"
+name = "Mail Attachments Cache"
+summary = "Attachments Mail saved when you opened them. Originals stay on the server."
+symbol = "envelope"
+paths = ["~/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/*"]
+running_apps = ["Mail"]
+selected = false
+
+# ── System ──────────────────────────────────────────────────────────────────
+
+[[category]]
+id = "user-logs"
+group = "system"
+name = "App Logs"
+summary = "Diagnostic logs written by apps. Safe to remove."
+symbol = "doc.text"
+paths = ["~/Library/Logs/*"]
+exclude = ["DiagnosticReports"]
+
+[[category]]
+id = "user-caches"
+group = "system"
+name = "App Caches"
+summary = "Files apps keep to load faster. They are recreated as needed."
+symbol = "internaldrive"
+paths = ["~/Library/Caches/*"]
+exclude = [
+  "com.apple.bird*",
+  "CloudKit",
+  "com.apple.HomeKit*",
+  "com.apple.containermanagerd",
+  "FamilyCircle",
+  "com.apple.ap.adprivacyd",
+]
+
+[[category]]
+id = "trash"
+group = "system"
+name = "Trash"
+summary = "Items already in your Trash. Emptying is permanent."
+symbol = "trash"
+paths = ["~/.Trash/*"]
+action = "delete"
+selected = false

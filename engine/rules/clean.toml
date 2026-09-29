@@ -1,4 +1,4 @@
-# Burrow cleanup catalog.
+# Loft cleanup catalog.
 #
 # Categories are evaluated in file order. A path claimed by an earlier category
 # (or any ancestor/descendant of it) is never claimed again by a later one, so

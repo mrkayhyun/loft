@@ -111,39 +111,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "72f5acc6cb2ba439de613abc23857ec3d78374d8ed5ac84e9d11336e87da8649"
 
 [[package]]
-name = "burrow-cli"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "burrow-core",
- "clap",
- "plist",
- "rayon",
- "serde",
- "serde_json",
- "sysinfo",
-]
-
-[[package]]
-name = "burrow-core"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "glob",
- "globset",
- "libc",
- "plist",
- "rayon",
- "serde",
- "serde_json",
- "sysinfo",
- "tempfile",
- "thiserror",
- "toml",
- "trash",
-]
-
-[[package]]
 name = "cc"
 version = "1.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -421,6 +388,39 @@ name = "linux-raw-sys"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "32a66949e030da00e8c7d4434b251670a91556f4144941d37452769c25d58a53"
+
+[[package]]
+name = "loft-cli"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "loft-core",
+ "plist",
+ "rayon",
+ "serde",
+ "serde_json",
+ "sysinfo",
+]
+
+[[package]]
+name = "loft-core"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "glob",
+ "globset",
+ "libc",
+ "plist",
+ "rayon",
+ "serde",
+ "serde_json",
+ "sysinfo",
+ "tempfile",
+ "thiserror",
+ "toml",
+ "trash",
+]
 
 [[package]]
 name = "log"

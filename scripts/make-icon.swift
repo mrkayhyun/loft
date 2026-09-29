@@ -1,5 +1,8 @@
-// Renders Burrow's 1024×1024 app icon to the path given as the first argument.
+// Renders Loft's 1024×1024 app icon to the path given as the first argument.
 // Usage: swift scripts/make-icon.swift out.png
+//
+// The mark (gable roof + skylight) is drawn from primitives — no SF Symbols,
+// whose license forbids use in app icons. Geometry matches LoftMark.swift.
 import AppKit
 
 let canvas: CGFloat = 1024
@@ -11,6 +14,11 @@ guard CommandLine.arguments.count == 2 else {
     exit(2)
 }
 let output = URL(fileURLWithPath: CommandLine.arguments[1])
+
+/// Unit-square point (y up) → tile coordinates.
+func point(_ x: CGFloat, _ y: CGFloat, in tile: NSRect) -> NSPoint {
+    NSPoint(x: tile.minX + x * tile.width, y: tile.minY + y * tile.height)
+}
 
 let image = NSImage(size: NSSize(width: canvas, height: canvas), flipped: false) { _ in
     let tile = NSRect(x: inset, y: inset, width: canvas - inset * 2, height: canvas - inset * 2)
@@ -27,42 +35,44 @@ let image = NSImage(size: NSSize(width: canvas, height: canvas), flipped: false)
     squircle.fill()
     NSGraphicsContext.restoreGraphicsState()
 
-    // Violet → magenta body with a deep base in the lower corner.
+    // Dawn sky: warm peach at the top fading into violet and deep indigo.
     let body = NSGradient(colors: [
-        NSColor(red: 0.98, green: 0.45, blue: 0.95, alpha: 1),
-        NSColor(red: 0.49, green: 0.42, blue: 1.0, alpha: 1),
-        NSColor(red: 0.16, green: 0.1, blue: 0.42, alpha: 1),
-    ], atLocations: [0, 0.55, 1], colorSpace: .sRGB)!
-    body.draw(in: squircle, angle: -60)
+        NSColor(red: 1.0, green: 0.72, blue: 0.55, alpha: 1),
+        NSColor(red: 0.62, green: 0.45, blue: 1.0, alpha: 1),
+        NSColor(red: 0.13, green: 0.1, blue: 0.38, alpha: 1),
+    ], atLocations: [0, 0.5, 1], colorSpace: .sRGB)!
+    body.draw(in: squircle, angle: -90)
 
     // Glossy top highlight.
     NSGraphicsContext.saveGraphicsState()
     squircle.addClip()
-    let gloss = NSGradient(colors: [NSColor.white.withAlphaComponent(0.35), NSColor.white.withAlphaComponent(0)])!
+    let gloss = NSGradient(colors: [NSColor.white.withAlphaComponent(0.3), NSColor.white.withAlphaComponent(0)])!
     gloss.draw(in: NSRect(x: tile.minX, y: tile.midY, width: tile.width, height: tile.height / 2), angle: -90)
     NSGraphicsContext.restoreGraphicsState()
 
-    // Burrow opening: a soft dark ellipse.
-    let hole = NSRect(x: tile.midX - 250, y: tile.minY + 120, width: 500, height: 150)
-    NSGradient(colors: [NSColor.black.withAlphaComponent(0.55), NSColor.black.withAlphaComponent(0)])!
-        .draw(in: NSBezierPath(ovalIn: hole), relativeCenterPosition: .zero)
+    NSGraphicsContext.saveGraphicsState()
+    let glow = NSShadow()
+    glow.shadowColor = NSColor.black.withAlphaComponent(0.28)
+    glow.shadowBlurRadius = 20
+    glow.shadowOffset = NSSize(width: 0, height: -10)
+    glow.set()
+    NSColor.white.set()
 
-    // White hare glyph peeking out of the burrow.
-    let config = NSImage.SymbolConfiguration(pointSize: 430, weight: .bold)
-        .applying(.init(paletteColors: [.white]))
-    if let glyph = NSImage(systemSymbolName: "hare.fill", accessibilityDescription: nil)?
-        .withSymbolConfiguration(config) {
-        let size = glyph.size
-        let origin = NSPoint(x: tile.midX - size.width / 2, y: tile.minY + 190)
-        NSGraphicsContext.saveGraphicsState()
-        let glow = NSShadow()
-        glow.shadowColor = NSColor.black.withAlphaComponent(0.3)
-        glow.shadowBlurRadius = 18
-        glow.shadowOffset = NSSize(width: 0, height: -8)
-        glow.set()
-        glyph.draw(at: origin, from: .zero, operation: .sourceOver, fraction: 1)
-        NSGraphicsContext.restoreGraphicsState()
-    }
+    // Gable roof.
+    let roof = NSBezierPath()
+    roof.move(to: point(0.2, 0.38, in: tile))
+    roof.line(to: point(0.5, 0.7, in: tile))
+    roof.line(to: point(0.8, 0.38, in: tile))
+    roof.lineWidth = tile.width * 0.09
+    roof.lineCapStyle = .round
+    roof.lineJoinStyle = .round
+    roof.stroke()
+
+    // Skylight.
+    let window = tile.width * 0.075
+    let center = point(0.5, 0.44, in: tile)
+    NSBezierPath(ovalIn: NSRect(x: center.x - window, y: center.y - window, width: window * 2, height: window * 2)).fill()
+    NSGraphicsContext.restoreGraphicsState()
 
     // Hairline edge.
     NSColor.white.withAlphaComponent(0.22).setStroke()

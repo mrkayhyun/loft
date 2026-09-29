@@ -3,7 +3,7 @@
 %@ · %@
 %lld
 %lld%@
-Burrow
+Loft
 CPU
 dir
 rate

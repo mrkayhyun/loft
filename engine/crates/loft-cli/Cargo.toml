@@ -1,0 +1,19 @@
+[package]
+name = "loft-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "loft"
+path = "src/main.rs"
+
+[dependencies]
+loft-core = { path = "../loft-core" }
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+clap.workspace = true
+rayon.workspace = true
+plist.workspace = true
+sysinfo.workspace = true

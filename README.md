@@ -1,4 +1,4 @@
-# Burrow
+# Loft
 
 Safe, fast macOS cleanup — a Rust engine with a native SwiftUI app.
 
@@ -13,16 +13,16 @@ UI languages: English, 한국어 (follows the system or per-app language setting
 
 | Path | What |
 |---|---|
-| `engine/` | Rust workspace: `burrow-core` (scan, guard, sizing, execution) and the `burrow` CLI |
+| `engine/` | Rust workspace: `loft-core` (scan, guard, sizing, execution) and the `loft` CLI |
 | `engine/rules/clean.toml` | Declarative cleanup catalog |
-| `app/` | SwiftPM package: `BurrowKit` (models, engine client, treemap) and the `Burrow` app |
+| `app/` | SwiftPM package: `LoftKit` (models, engine client, treemap) and the `Loft` app |
 | `app/Localization/` | `.strings` tables (`Localizable` for UI, `Engine` for engine text) |
 | `scripts/` | `build-app.sh`, `check-l10n.sh`, `make-icon.swift` |
 
 ## Build
 
 ```sh
-scripts/build-app.sh          # → dist/Burrow.app (engine + app + icon, ad-hoc signed)
+scripts/build-app.sh          # → dist/Loft.app (engine + app + icon, ad-hoc signed)
 ```
 
 Tests:
@@ -43,5 +43,5 @@ seen during the scan. Items go to the Trash; only items already in the Trash can
 ## License
 
 GPL-3.0-only. The cleanup rules and safety approach are derived from
-[tw93/mole](https://github.com/tw93/mole) (GPL-3.0). Burrow is an independent project and is not
+[tw93/mole](https://github.com/tw93/mole) (GPL-3.0). Loft is an independent project and is not
 affiliated with or endorsed by Mole.

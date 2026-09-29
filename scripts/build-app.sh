@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Build Burrow.app: Rust engine + SwiftUI app + icon, ad-hoc signed.
-# Usage: scripts/build-app.sh            → dist/Burrow.app
+# Build Loft.app: Rust engine + SwiftUI app + icon, ad-hoc signed.
+# Usage: scripts/build-app.sh            → dist/Loft.app
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIST="$ROOT/dist"
-APP="$DIST/Burrow.app"
+APP="$DIST/Loft.app"
 WORK="$DIST/.work"
 VERSION="$(sed -n 's/^version = "\(.*\)"/\1/p' "$ROOT/engine/Cargo.toml" | head -1)"
-BUNDLE_ID="dev.burrow.app"
+BUNDLE_ID="dev.loft.app"
 MIN_MACOS="15.0"
 
 step() { printf '\033[1;35m▸\033[0m %s\n' "$*"; }
@@ -18,7 +18,7 @@ cargo build --release --manifest-path "$ROOT/engine/Cargo.toml"
 
 step "Building app (release)"
 swift build -c release --package-path "$ROOT/app"
-APP_BIN="$(swift build -c release --package-path "$ROOT/app" --show-bin-path)/Burrow"
+APP_BIN="$(swift build -c release --package-path "$ROOT/app" --show-bin-path)/Loft"
 
 step "Checking translations"
 "$ROOT/scripts/check-l10n.sh"
@@ -36,8 +36,8 @@ iconutil -c icns "$WORK/AppIcon.iconset" -o "$WORK/AppIcon.icns"
 step "Assembling $APP"
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-cp "$APP_BIN" "$APP/Contents/MacOS/Burrow"
-cp "$ROOT/engine/target/release/burrow" "$APP/Contents/Resources/burrow"
+cp "$APP_BIN" "$APP/Contents/MacOS/Loft"
+cp "$ROOT/engine/target/release/loft" "$APP/Contents/Resources/loft"
 cp "$WORK/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns"
 for lproj in "$ROOT/app/Localization"/*.lproj; do
     dest="$APP/Contents/Resources/$(basename "$lproj")"
@@ -51,10 +51,10 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleName</key><string>Burrow</string>
-    <key>CFBundleDisplayName</key><string>Burrow</string>
+    <key>CFBundleName</key><string>Loft</string>
+    <key>CFBundleDisplayName</key><string>Loft</string>
     <key>CFBundleIdentifier</key><string>${BUNDLE_ID}</string>
-    <key>CFBundleExecutable</key><string>Burrow</string>
+    <key>CFBundleExecutable</key><string>Loft</string>
     <key>CFBundleIconFile</key><string>AppIcon</string>
     <key>CFBundleDevelopmentRegion</key><string>en</string>
     <key>CFBundleLocalizations</key><array><string>en</string><string>ko</string></array>
@@ -70,7 +70,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 PLIST
 
 step "Signing (ad-hoc)"
-codesign --force --sign - "$APP/Contents/Resources/burrow"
+codesign --force --sign - "$APP/Contents/Resources/loft"
 codesign --force --sign - "$APP"
 rm -rf "$WORK"
 

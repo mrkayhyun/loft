@@ -1,4 +1,4 @@
-/* Burrow — Korean text for engine output (see EngineText.swift).
+/* Loft — Korean text for engine output (see EngineText.swift).
    category.<id>.name / .summary must cover every id in engine/rules/clean.toml. */
 
 "category.chrome-cache.name" = "Chrome 캐시";
@@ -65,7 +65,7 @@
 "reason.permanent delete is limited to the Trash" = "영구 삭제는 휴지통 항목만 가능";
 "reason.not a leftover of this app" = "이 앱의 잔여 파일이 아님";
 "reason.Missing bundle identifier" = "번들 식별자가 없음";
-"reason.Burrow cannot remove itself" = "Burrow는 자기 자신을 제거할 수 없습니다";
+"reason.Loft cannot remove itself" = "Loft는 자기 자신을 제거할 수 없습니다";
 "reason.Managed by your organisation — use the vendor's uninstaller" = "조직에서 관리하는 앱입니다 — 제조사의 제거 도구를 사용하세요";
 "reason.Part of macOS" = "macOS 기본 구성 요소";
 "reason.not an application bundle" = "앱 번들이 아님";

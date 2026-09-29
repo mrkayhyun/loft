@@ -2,20 +2,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "Burrow",
+    name: "Loft",
     platforms: [.macOS(.v15)],
     products: [
-        .executable(name: "Burrow", targets: ["Burrow"]),
+        .executable(name: "Loft", targets: ["Loft"]),
     ],
     targets: [
-        .target(name: "BurrowKit"),
+        .target(name: "LoftKit"),
         .executableTarget(
-            name: "Burrow",
-            dependencies: ["BurrowKit"]
+            name: "Loft",
+            dependencies: ["LoftKit"]
         ),
         .testTarget(
-            name: "BurrowKitTests",
-            dependencies: ["BurrowKit"]
+            name: "LoftKitTests",
+            dependencies: ["LoftKit"]
         ),
     ]
 )

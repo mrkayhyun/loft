@@ -1,4 +1,4 @@
-/* Burrow — Korean UI strings. Keys are the English source text. */
+/* Loft — Korean UI strings. Keys are the English source text. */
 
 /* Navigation */
 "Overview" = "개요";
@@ -30,8 +30,8 @@
 "%@ of %@" = "%2$@ 중 %1$@";
 "of %@" = "전체 %@";
 "%lld percent" = "%lld퍼센트";
-"Burrow's engine is missing" = "Burrow 엔진을 찾을 수 없습니다";
-"Reinstall Burrow, or build it with scripts/build-app.sh." = "Burrow를 다시 설치하거나 scripts/build-app.sh로 빌드하세요.";
+"Loft's engine is missing" = "Loft 엔진을 찾을 수 없습니다";
+"Reinstall Loft, or build it with scripts/build-app.sh." = "Loft를 다시 설치하거나 scripts/build-app.sh로 빌드하세요.";
 
 /* Overview */
 "Good morning" = "좋은 아침이에요";
@@ -47,7 +47,7 @@
 "Processor" = "프로세서";
 "%lld cores" = "%lld코어";
 "Cleaned so far" = "지금까지 정리한 용량";
-"Across all Burrow cleans" = "Burrow로 정리한 전체 용량";
+"Across all Loft cleans" = "Loft로 정리한 전체 용량";
 
 /* Smart Clean */
 "Find space you can safely reclaim" = "안전하게 확보할 수 있는 공간 찾기";

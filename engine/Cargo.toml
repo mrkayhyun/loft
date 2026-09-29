@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/burrow-core", "crates/burrow-cli"]
+members = ["crates/loft-core", "crates/loft-cli"]
 
 [workspace.package]
 version = "0.1.0"

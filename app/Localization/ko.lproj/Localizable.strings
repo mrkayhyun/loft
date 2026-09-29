@@ -1,0 +1,144 @@
+/* Burrow — Korean UI strings. Keys are the English source text. */
+
+/* Navigation */
+"Overview" = "개요";
+"Smart Clean" = "스마트 정리";
+"Uninstaller" = "앱 제거";
+"Space Lens" = "공간 렌즈";
+"Monitor" = "모니터";
+"Your Mac at a glance" = "Mac 상태 한눈에 보기";
+"Caches, logs and leftovers" = "캐시, 로그, 남은 파일";
+"Remove apps completely" = "앱을 흔적 없이 제거";
+"See what takes up space" = "공간을 차지하는 항목 보기";
+"Live system health" = "실시간 시스템 상태";
+"Go" = "이동";
+"Smart Scan" = "스마트 스캔";
+
+/* Common */
+"Scan" = "스캔";
+"Clean" = "정리";
+"Done" = "완료";
+"Stop" = "중지";
+"Refresh" = "새로고침";
+"Show in Finder" = "Finder에서 보기";
+"Try Again" = "다시 시도";
+"Something went wrong" = "문제가 발생했습니다";
+"Measuring…" = "측정 중…";
+"Preparing" = "준비 중";
+"available" = "사용 가능";
+"%@ available of %@" = "%2$@ 중 %1$@ 사용 가능";
+"%@ of %@" = "%2$@ 중 %1$@";
+"of %@" = "전체 %@";
+"%lld percent" = "%lld퍼센트";
+"Burrow's engine is missing" = "Burrow 엔진을 찾을 수 없습니다";
+"Reinstall Burrow, or build it with scripts/build-app.sh." = "Burrow를 다시 설치하거나 scripts/build-app.sh로 빌드하세요.";
+
+/* Overview */
+"Good morning" = "좋은 아침이에요";
+"Good afternoon" = "좋은 오후예요";
+"Good evening" = "좋은 저녁이에요";
+"Keep your Mac feeling new" = "Mac을 새것처럼 유지하세요";
+"Smart Clean finds caches, logs and developer leftovers that are safe to remove. Everything is checked twice and goes to the Trash first." = "스마트 정리는 안전하게 지울 수 있는 캐시, 로그, 개발 도구 잔여 파일을 찾아냅니다. 모든 항목은 두 번 확인한 뒤 먼저 휴지통으로 이동합니다.";
+"%@ used of %@ on %@" = "%3$@ · %2$@ 중 %1$@ 사용 중";
+"Reclaimable" = "확보 가능";
+"Run a scan to find out" = "스캔해서 확인하세요";
+"Found by the last scan" = "마지막 스캔 결과";
+"Memory" = "메모리";
+"Processor" = "프로세서";
+"%lld cores" = "%lld코어";
+"Cleaned so far" = "지금까지 정리한 용량";
+"Across all Burrow cleans" = "Burrow로 정리한 전체 용량";
+
+/* Smart Clean */
+"Find space you can safely reclaim" = "안전하게 확보할 수 있는 공간 찾기";
+"A read-only scan. Nothing is removed until you review it." = "읽기 전용 스캔입니다. 검토하기 전에는 아무것도 삭제하지 않습니다.";
+"App caches & logs" = "앱 캐시 및 로그";
+"Xcode & simulators" = "Xcode 및 시뮬레이터";
+"Package managers" = "패키지 매니저";
+"Browser caches" = "브라우저 캐시";
+"Protected: documents, iCloud, keychains, password managers and running apps." = "보호 대상: 문서, iCloud, 키체인, 비밀번호 관리자, 실행 중인 앱";
+"Scanning…" = "스캔 중…";
+"found so far" = "지금까지 발견";
+"Scan Again" = "다시 스캔";
+"Selected to clean" = "정리할 항목";
+"%@ found in %lld categories · scanned in %@" = "%2$lld개 카테고리에서 %1$@ 발견 · %3$@ 만에 스캔";
+"System" = "시스템";
+"Developer" = "개발";
+"Browsers" = "브라우저";
+"Apps" = "앱";
+"Permanent" = "영구 삭제";
+"Partial" = "일부";
+"Quit %@" = "%@ 종료";
+"%@ is running. Quit it to clean this safely." = "%@ 앱이 실행 중입니다. 안전하게 정리하려면 종료하세요.";
+"%lld items" = "%lld개 항목";
+"+ %lld more items" = "외 %lld개 항목";
+"Some folders couldn't be read" = "일부 폴더를 읽지 못했습니다";
+"%llu items need Full Disk Access to be measured. Grant it for a deeper clean." = "항목 %llu개를 측정하려면 전체 디스크 접근 권한이 필요합니다. 권한을 주면 더 깊이 정리할 수 있습니다.";
+"Open Settings" = "설정 열기";
+"Empty the Trash?" = "휴지통을 비울까요?";
+"Clean and Empty Trash" = "정리하고 휴지통 비우기";
+"Items already in the Trash will be permanently deleted. Everything else is moved to the Trash." = "휴지통에 이미 있는 항목은 영구 삭제됩니다. 나머지 항목은 휴지통으로 이동합니다.";
+"Cleaning %lld of %lld" = "%2$lld개 중 %1$lld개 정리 중";
+"freed" = "확보됨";
+"All clean" = "정리 완료";
+"moved to the Trash" = "휴지통으로 이동됨";
+"Cleaned" = "정리됨";
+"Skipped" = "건너뜀";
+"Failed" = "실패";
+"Hide details" = "세부 정보 숨기기";
+"Why were some skipped?" = "일부 항목을 건너뛴 이유";
+"Open Trash" = "휴지통 열기";
+"%@ is running" = "%@ 실행 중";
+
+/* Uninstaller */
+"Measuring apps…" = "앱 크기 측정 중…";
+"%lld apps · %@" = "앱 %lld개 · %@";
+"Search apps" = "앱 검색";
+"Sort" = "정렬";
+"Size" = "크기";
+"Name" = "이름";
+"Finding your apps…" = "앱을 찾는 중…";
+"Choose an app to see everything it installed" = "앱을 선택하면 설치된 모든 파일을 볼 수 있습니다";
+"app size" = "앱 크기";
+"RELATED FILES" = "관련 파일";
+"Looking for related files…" = "관련 파일을 찾는 중…";
+"No related files found outside the app bundle." = "앱 번들 밖에서 관련 파일을 찾지 못했습니다.";
+"Matched by name — review before removing" = "이름으로 찾은 항목 — 제거 전에 확인하세요";
+"Total to remove" = "제거할 총 용량";
+"Uninstall" = "제거";
+"Uninstall %@?" = "%@ 앱을 제거할까요?";
+"Move to Trash" = "휴지통으로 이동";
+"%@ and %lld related items (%@) will be moved to the Trash." = "%1$@ 및 관련 항목 %2$lld개(%3$@)가 휴지통으로 이동됩니다.";
+"%@ is running. Quit it before uninstalling." = "%@ 앱이 실행 중입니다. 제거하기 전에 종료하세요.";
+"Quit %@ before uninstalling" = "제거하기 전에 %@ 앱을 종료하세요";
+"%@ was removed" = "%@ 앱을 제거했습니다";
+"%lld related items could not be removed." = "관련 항목 %lld개를 제거하지 못했습니다.";
+"The app could not be moved to the Trash." = "앱을 휴지통으로 옮기지 못했습니다.";
+
+/* Space Lens */
+"Choose Folder…" = "폴더 선택…";
+"Analyze" = "분석";
+"%@ of this folder" = "이 폴더의 %@";
+"%@ files" = "파일 %@개";
+"Click to open" = "클릭하여 열기";
+"Hover a tile for details · click a folder to open it · right-click to reveal in Finder" = "타일에 마우스를 올리면 세부 정보 · 폴더를 클릭하면 열기 · 오른쪽 클릭하면 Finder에서 보기";
+"This folder is empty" = "빈 폴더입니다";
+
+/* Monitor */
+"Battery" = "배터리";
+"Disk" = "디스크";
+"Memory pressure" = "메모리 사용률";
+"Load %@" = "부하 %@";
+"Power adapter" = "전원 어댑터";
+"Charging" = "충전 중";
+"%lldh %lldm left" = "%lld시간 %lld분 남음";
+"On power adapter" = "전원 어댑터 연결됨";
+"On battery" = "배터리 사용 중";
+"Network" = "네트워크";
+"Download" = "다운로드";
+"Upload" = "업로드";
+"Up %@ · %@" = "가동 시간 %@ · %@";
+"%llud %lluh" = "%llu일 %llu시간";
+"%lluh %llum" = "%llu시간 %llu분";
+"Top processes" = "상위 프로세스";
+"Collecting…" = "수집 중…";

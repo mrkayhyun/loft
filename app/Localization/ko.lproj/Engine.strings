@@ -1,0 +1,75 @@
+/* Burrow — Korean text for engine output (see EngineText.swift).
+   category.<id>.name / .summary must cover every id in engine/rules/clean.toml. */
+
+"category.chrome-cache.name" = "Chrome 캐시";
+"category.chrome-cache.summary" = "Google Chrome이 다시 만들 수 있는 페이지 및 코드 캐시입니다.";
+"category.edge-cache.name" = "Edge 캐시";
+"category.edge-cache.summary" = "Microsoft Edge가 다시 만들 수 있는 페이지 캐시입니다.";
+"category.brave-cache.name" = "Brave 캐시";
+"category.brave-cache.summary" = "Brave가 다시 만들 수 있는 페이지 캐시입니다.";
+"category.firefox-cache.name" = "Firefox 캐시";
+"category.firefox-cache.summary" = "Firefox 프로필의 네트워크 캐시입니다.";
+"category.xcode-derived-data.name" = "Xcode Derived Data";
+"category.xcode-derived-data.summary" = "빌드 결과물과 인덱스입니다. 다음 빌드 때 Xcode가 다시 만듭니다.";
+"category.xcode-archives.name" = "Xcode 아카이브";
+"category.xcode-archives.summary" = "오래된 앱 아카이브입니다. 크래시 분석용 dSYM이 들어 있으니 확인 후 제거하세요.";
+"category.simulator-caches.name" = "시뮬레이터 캐시";
+"category.simulator-caches.summary" = "CoreSimulator 캐시와 로그입니다. 기기와 데이터는 건드리지 않습니다.";
+"category.xcode-cache.name" = "Xcode 캐시";
+"category.xcode-cache.summary" = "Xcode 자체의 다운로드 및 문서 캐시입니다.";
+"category.node-package-caches.name" = "JavaScript 패키지 캐시";
+"category.node-package-caches.summary" = "npm, pnpm, Yarn, Bun 다운로드 캐시입니다. 필요할 때 다시 받아옵니다.";
+"category.python-package-caches.name" = "Python 패키지 캐시";
+"category.python-package-caches.summary" = "pip, uv, conda 다운로드 캐시입니다.";
+"category.gradle-caches.name" = "Gradle 캐시";
+"category.gradle-caches.summary" = "Gradle 빌드 캐시, 데몬, 알림 파일입니다.";
+"category.cargo-registry-cache.name" = "Cargo 다운로드 캐시";
+"category.cargo-registry-cache.summary" = "압축된 크레이트 다운로드 파일입니다. 풀어 둔 소스는 유지합니다.";
+"category.homebrew-cache.name" = "Homebrew 다운로드";
+"category.homebrew-cache.summary" = "내려받은 바틀과 소스 압축 파일입니다.";
+"category.huggingface-cache.name" = "Hugging Face 모델";
+"category.huggingface-cache.summary" = "내려받은 모델과 데이터셋입니다. 용량이 크지만 다시 받는 데 오래 걸릴 수 있습니다.";
+"category.partial-downloads.name" = "완료되지 않은 다운로드";
+"category.partial-downloads.summary" = "하루 이상 방치된 브라우저 다운로드 조각입니다.";
+"category.mail-downloads.name" = "Mail 첨부 파일 캐시";
+"category.mail-downloads.summary" = "Mail에서 열었던 첨부 파일 사본입니다. 원본은 서버에 남아 있습니다.";
+"category.user-logs.name" = "앱 로그";
+"category.user-logs.summary" = "앱이 남긴 진단 로그입니다. 안전하게 지울 수 있습니다.";
+"category.user-caches.name" = "앱 캐시";
+"category.user-caches.summary" = "앱을 빠르게 열기 위해 저장한 파일입니다. 필요하면 다시 만들어집니다.";
+"category.trash.name" = "휴지통";
+"category.trash.summary" = "이미 휴지통에 있는 항목입니다. 비우면 되돌릴 수 없습니다.";
+
+/* Leftover kinds */
+"kind.Application Support" = "앱 지원 파일";
+"kind.Caches" = "캐시";
+"kind.Preferences" = "환경설정";
+"kind.Container" = "컨테이너";
+"kind.Saved State" = "저장된 상태";
+"kind.Web Data" = "웹 데이터";
+"kind.Logs" = "로그";
+"kind.App Scripts" = "앱 스크립트";
+"kind.Launch Agent" = "실행 에이전트";
+
+/* Skip, failure and protection reasons */
+"reason.path is not covered by its category" = "카테고리 규칙에 맞지 않는 경로";
+"reason.path is not absolute" = "절대 경로가 아님";
+"reason.path contains relative components" = "상대 경로가 포함됨";
+"reason.path is outside the home folder" = "홈 폴더 밖의 경로";
+"reason.path is a protected folder" = "보호된 폴더";
+"reason.path is inside a protected area" = "보호 영역 안의 경로";
+"reason.path belongs to a data-protected app" = "데이터 보호 대상 앱의 파일";
+"reason.a parent folder is a symbolic link" = "상위 폴더가 심볼릭 링크임";
+"reason.no longer exists" = "이미 없어짐";
+"reason.changed since the scan" = "스캔 이후 변경됨";
+"reason.permanent delete is limited to the Trash" = "영구 삭제는 휴지통 항목만 가능";
+"reason.not a leftover of this app" = "이 앱의 잔여 파일이 아님";
+"reason.Missing bundle identifier" = "번들 식별자가 없음";
+"reason.Burrow cannot remove itself" = "Burrow는 자기 자신을 제거할 수 없습니다";
+"reason.Managed by your organisation — use the vendor's uninstaller" = "조직에서 관리하는 앱입니다 — 제조사의 제거 도구를 사용하세요";
+"reason.Part of macOS" = "macOS 기본 구성 요소";
+"reason.not an application bundle" = "앱 번들이 아님";
+"reason.application not found" = "앱을 찾을 수 없음";
+"reason.application is not a real bundle" = "실제 앱 번들이 아님";
+"reason.application is outside /Applications" = "응용 프로그램 폴더 밖에 있는 앱";
+"reason.cannot read Info.plist" = "Info.plist를 읽을 수 없음";

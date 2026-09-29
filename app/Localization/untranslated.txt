@@ -1,0 +1,11 @@
+# Localizable keys that are intentionally the same in every language
+# (chart series ids, symbols, pure format strings, brand names).
+%@ · %@
+%lld
+%lld%@
+Burrow
+CPU
+dir
+rate
+t
+—

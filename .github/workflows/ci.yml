@@ -13,13 +13,14 @@ concurrency:
 jobs:
   engine:
     name: Engine (Rust)
-    runs-on: macos-15
+    runs-on: macos-26
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install Rust toolchain
         run: |
-          rustup toolchain install 1.80 --profile minimal --component rustfmt,clippy
-          rustup default 1.80
+          rustup toolchain install stable --profile minimal --component rustfmt,clippy
+          rustup default stable
+          rustc --version
       - name: Cache cargo
         uses: actions/cache@v4
         with:
@@ -40,11 +41,9 @@ jobs:
 
   app:
     name: App (Swift) + l10n
-    runs-on: macos-15
+    runs-on: macos-26
     steps:
-      - uses: actions/checkout@v4
-      - name: Select Xcode 16
-        run: sudo xcode-select -s /Applications/Xcode_16.app
+      - uses: actions/checkout@v5
       - name: Swift version
         run: swift --version
       - name: Test

@@ -12,7 +12,6 @@ use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Mutex;
 use std::time::Instant;
 
-use rayon::prelude::*;
 use serde::Serialize;
 
 const BLOCK_SIZE: u64 = 512;
@@ -118,10 +117,20 @@ impl Sizer {
             Ok(entries) => entries,
             Err(_) => return own.merge(Size::error()),
         };
-        let children: Vec<_> = entries.collect();
-        let child_total = children
-            .into_par_iter()
-            .map(|entry| match entry {
+        // Walk children sequentially. Directory sizing is invoked from
+        // `scan`/`analyze` inside an outer `par_iter` over candidates, so the
+        // parallelism budget is already spent there; recursing with a nested
+        // `par_iter` here floods the global rayon pool on wide, deep trees
+        // (e.g. `~/.gradle/caches`) and stalls progress. The deadline is
+        // checked every entry so an over-budget walk stops promptly and is
+        // reported as `partial` rather than hanging.
+        let mut total = own;
+        for entry in entries {
+            if self.out_of_budget() {
+                total.partial = true;
+                break;
+            }
+            let child_size = match entry {
                 Ok(entry) => {
                     let child = entry.path();
                     match fs::symlink_metadata(&child) {
@@ -130,9 +139,10 @@ impl Sizer {
                     }
                 }
                 Err(_) => Size::error(),
-            })
-            .reduce(Size::default, Size::merge);
-        own.merge(child_total)
+            };
+            total = total.merge(child_size);
+        }
+        total
     }
 
     fn own_size(&self, meta: &fs::Metadata) -> Size {
@@ -217,5 +227,39 @@ mod tests {
         write_file(&dir.path().join("f"), 1024);
         let sizer = Sizer::new(Some(Instant::now()));
         assert!(sizer.measure(dir.path()).partial);
+    }
+
+    #[test]
+    fn deadline_stops_walk_over_many_children() {
+        // A directory with several children; an already-expired deadline must
+        // short-circuit the sequential walk and report a partial result
+        // instead of sizing every entry.
+        let dir = tempfile::tempdir().unwrap();
+        for i in 0..16 {
+            write_file(&dir.path().join(format!("f{i}")), 1024);
+        }
+        let sizer = Sizer::new(Some(Instant::now()));
+        let size = sizer.measure(dir.path());
+        assert!(size.partial, "expired deadline should mark the walk partial");
+        assert!(
+            size.files < 16,
+            "walk should stop early, got {} files",
+            size.files
+        );
+    }
+
+    #[test]
+    fn measures_deep_tree_without_deadline() {
+        // Sequential recursion must still descend a deep, narrow tree fully.
+        let dir = tempfile::tempdir().unwrap();
+        let mut p = dir.path().to_path_buf();
+        for level in 0..8 {
+            p = p.join(format!("level{level}"));
+            fs::create_dir_all(&p).unwrap();
+            write_file(&p.join("leaf"), 4096);
+        }
+        let size = Sizer::default().measure(dir.path());
+        assert_eq!(size.files, 8);
+        assert!(!size.partial);
     }
 }

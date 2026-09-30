@@ -1,0 +1,38 @@
+name: Bug report / 버그 리포트
+description: Report a problem with Loft / Loft의 문제를 제보합니다
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Loft version / 버전
+      placeholder: "e.g. 0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version / macOS 버전
+      placeholder: "e.g. macOS 15.1 (Apple Silicon)"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce / 재현 절차
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual / 기대한 동작 vs 실제 동작
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        보안 취약점은 여기에 올리지 말고 [SECURITY.md](../blob/master/SECURITY.md)의 절차를 따라 주세요.
+        Do not report security issues here — see SECURITY.md.

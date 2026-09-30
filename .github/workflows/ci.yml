@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  engine:
+    name: Engine (Rust)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        run: |
+          rustup toolchain install 1.80 --profile minimal --component rustfmt,clippy
+          rustup default 1.80
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            engine/target
+          key: cargo-${{ runner.os }}-${{ hashFiles('engine/Cargo.lock') }}
+          restore-keys: cargo-${{ runner.os }}-
+      - name: Format check
+        continue-on-error: true
+        run: cargo fmt --manifest-path engine/Cargo.toml --all -- --check
+      - name: Clippy
+        continue-on-error: true
+        run: cargo clippy --manifest-path engine/Cargo.toml --all-targets
+      - name: Test
+        run: cargo test --manifest-path engine/Cargo.toml
+
+  app:
+    name: App (Swift) + l10n
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select Xcode 16
+        run: sudo xcode-select -s /Applications/Xcode_16.app
+      - name: Swift version
+        run: swift --version
+      - name: Test
+        run: swift test --package-path app
+      - name: Localization check
+        run: scripts/check-l10n.sh

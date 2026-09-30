@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to build (e.g. v0.1.0)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & publish Loft.app
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install Rust toolchain
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+
+      - name: Resolve version
+        id: ver
+        run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Build Loft.app
+        run: scripts/build-app.sh
+
+      - name: Package
+        id: pkg
+        run: |
+          cd dist
+          ZIP="Loft-${{ steps.ver.outputs.version }}.zip"
+          ditto -c -k --keepParent Loft.app "$ZIP"
+          shasum -a 256 "$ZIP" | tee "$ZIP.sha256"
+          echo "zip=dist/$ZIP" >> "$GITHUB_OUTPUT"
+          echo "sha=dist/$ZIP.sha256" >> "$GITHUB_OUTPUT"
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.ver.outputs.tag }}
+          name: Loft ${{ steps.ver.outputs.tag }}
+          generate_release_notes: true
+          files: |
+            ${{ steps.pkg.outputs.zip }}
+            ${{ steps.pkg.outputs.sha }}
+          body: |
+            Loft ${{ steps.ver.outputs.tag }} — macOS 15+ app (ad-hoc signed).
+
+            > ⚠️ Ad-hoc signed / not notarized. First launch: right-click → Open,
+            > or `xattr -dr com.apple.quarantine Loft.app`.
+
+            The build is derived from [tw93/mole](https://github.com/tw93/mole) (GPL-3.0).

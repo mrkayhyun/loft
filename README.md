@@ -1,8 +1,26 @@
-# Loft
+<div align="center">
+  <h1>Loft</h1>
+  <p><em>🧹 Safe, fast macOS cleanup — a Rust engine with a native SwiftUI app.</em></p>
+</div>
 
-Safe, fast macOS cleanup — a Rust engine with a native SwiftUI app.
+<p align="center">
+  <a href="https://github.com/mrkayhyun/loft/stargazers"><img src="https://img.shields.io/github/stars/mrkayhyun/loft?style=flat-square" alt="Stars"></a>
+  <a href="https://github.com/mrkayhyun/loft/releases"><img src="https://img.shields.io/github/v/tag/mrkayhyun/loft?label=version&style=flat-square" alt="Version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL_v3-blue.svg?style=flat-square" alt="License"></a>
+  <a href="https://github.com/mrkayhyun/loft/actions"><img src="https://img.shields.io/github/actions/workflow/status/mrkayhyun/loft/ci.yml?branch=master&style=flat-square" alt="CI"></a>
+  <a href="https://github.com/mrkayhyun/loft/commits"><img src="https://img.shields.io/github/commit-activity/m/mrkayhyun/loft?style=flat-square" alt="Commits"></a>
+  <img src="https://img.shields.io/badge/macOS-15%2B-black?style=flat-square&logo=apple" alt="macOS 15+">
+</p>
 
-_English · [한국어](#한국어)_
+<p align="center">
+  <em>English · <a href="#한국어">한국어</a></em>
+</p>
+
+<!-- Add a hero screenshot once available, e.g.:
+<p align="center">
+  <img src="./docs/img/loft.png" alt="Loft cleanup results" width="1000" />
+</p>
+-->
 
 - **Smart Clean** — caches, logs and developer leftovers, reviewed before anything moves to the Trash
 - **Uninstaller** — apps plus files matched by their exact bundle identifier
